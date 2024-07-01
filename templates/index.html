@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Cropdoc - Our Plant Disease Detection Model</title>
+    <style>
+        /* Add some basic styling for the dialog */
+        #imagePreviewDialog {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #imagePreviewDialog img {
+            max-width: 100%;
+        }
+        #closeDialog {
+            display: block;
+            text-align: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav__logo">
+                <img src="{{ url_for('static', filename='images/cd.jpg') }}" alt="Cropdoc Logo">
+            </div>
+        </nav>
+        <main>
+            <h1>PREDICT YOUR PLANT DISEASE</h1>
+            <p>
+                It predicts the Plant Disease using CNN Model. It has an accuracy of 98%.
+            </p>
+            <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <input type="file" name="file" id="imageUpload" accept="image/*">
+                    <button type="submit" id="uploadButton">Upload and Predict</button>
+                </div>
+                <div id="imagePreviewContainer" style="display: none;">
+                    <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 50%; height: auto; margin-top: 20px;">
+                </div>
+                <div id="predictionResult" style="margin-top: 10px;">
+                    {% if prediction %}
+                        <p><strong>Prediction:</strong> {{ prediction['prediction'] }}</p>
+                        <p><strong>Accuracy:</strong> {{ prediction['confidence'] * 100 }}%</p>
+                    {% elif error %}
+                        <p><strong>Error:</strong> {{ error }}</p>
+                    {% endif %}
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.src = e.target.result;
+                    imagePreviewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
