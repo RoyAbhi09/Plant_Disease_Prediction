@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --primary-color: #00605f;
+  --secondary-color: #017479;
+  --text-dark: #0f172a;
+  --text-light: #94a3b8;
+  --white: #ffffff;
+  --black: #000000;
+  --max-width: 1400px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(
+      to right,
+      rgba(2, 82, 89, 0.9),
+      rgba(255, 255, 255, 0)
+    ),
+    url("../images/bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  max-width: var(--max-width);
+  min-height: 100vh;
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.nav__logo img {
+  max-width: 80px;
+}
+
+main {
+  margin-top: 1rem; /* Adjust this value to move the heading and paragraph upwards */
+}
+
+main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+main p {
+  font-size: 1.125rem;
+  color: var(--white);
+  max-width: 800px;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align all items in the container */
+  margin-top: 2rem;
+  animation: fadeInUp 1s ease-in-out; /* Add fade-in animation */
+}
+
+#imageUpload,
+#uploadButton {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#imageUpload {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+#imageUpload:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+#uploadButton {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+#uploadButton:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+#imagePreviewContainer {
+  margin-top: 1rem;
+}
+#predictionResult{
+  font-size: 15px;
+}
+#predictionResult p{
+  color: rgb(2, 7, 17);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .search {
+    max-width: 235px;
+  }
+
+  .destination__container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+
+  .content h1 {
+    font-size: 4rem;
+  }
+
+  .destination__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  main h1 {
+    font-size: 2rem;
+  }
+
+  main p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  #imageUpload,
+  #uploadButton {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .upload-container {
+    width: 100%;
+    padding: 1rem;
+  }
+}
