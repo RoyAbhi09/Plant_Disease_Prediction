@@ -1,0 +1,7 @@
+Python
+Flask
+Numpy
+Pandas
+Tensorflow
+HTML
+CSS
